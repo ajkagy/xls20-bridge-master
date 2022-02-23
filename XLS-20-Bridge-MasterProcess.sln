@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XLS-20-Bridge-MasterProcess", "XLS-20-Bridge-MasterProcess.csproj", "{060406F1-CB17-4F43-AB0D-06025E98EFB9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22E56F66-AD53-41D7-97AA-A8A44D0F0BBB} = {22E56F66-AD53-41D7-97AA-A8A44D0F0BBB}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RippleDotNet", "..\RippleDotNet\src\RippleDotNet\RippleDotNet.csproj", "{22E56F66-AD53-41D7-97AA-A8A44D0F0BBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{060406F1-CB17-4F43-AB0D-06025E98EFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{060406F1-CB17-4F43-AB0D-06025E98EFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{060406F1-CB17-4F43-AB0D-06025E98EFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{060406F1-CB17-4F43-AB0D-06025E98EFB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E56F66-AD53-41D7-97AA-A8A44D0F0BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E56F66-AD53-41D7-97AA-A8A44D0F0BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E56F66-AD53-41D7-97AA-A8A44D0F0BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E56F66-AD53-41D7-97AA-A8A44D0F0BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C9F674F-8F36-4FA6-94DD-549091B42CAB}
+	EndGlobalSection
+EndGlobal

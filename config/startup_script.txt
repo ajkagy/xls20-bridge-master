@@ -1,0 +1,27 @@
+﻿CREATE TABLE IF NOT EXISTS BridgeNFT (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+   	contractAddress TEXT NOT NULL,
+	originOwner TEXT NOT NULL,
+	tokenId INTEGER NOT NULL,
+	xrplAddress TEXT NOT NULL,
+	blockNumber INTEGER NOT NULL,
+	xrplTokenId TEXT DEFAULT '',
+	nft_minted INTEGER DEFAULT 0,
+	nft_mint_txn_hash TEXT DEFAULT '',
+	nft_offer_txn_hash TEXT DEFAULT '',
+	status TEXT DEFAULT '',
+	last_updated NUMERIC DEFAULT 0,
+	tokenUri TEXT DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS ValidatorMetadata (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+   	bridgeNFTId INTEGER NOT NULL,
+	validatorNumber TEXT NOT NULL,
+	mintSign TEXT DEFAULT '',
+	mintSignCombined TEXT DEFAULT '',
+	mintOfferSigned TEXT DEFAULT '',
+	mintOfferSignedCombined TEXT DEFAULT '',
+	agreeMint INTEGER DEFAULT 0,
+	agreeOffer INTEGER DEFAULT 0
+);

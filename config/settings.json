@@ -1,0 +1,18 @@
+﻿{
+  "Tick_Time": 5,
+  "Block_Number": 1000,
+  "WSS_Server_Port": 11500,
+  "Https_Server_Port": 11501,
+  "Bridge_Contract": "0x9d26edd30bbcDc6EA8884f8c97620306e79D75Fd",
+  "XRPL_Issuer": "rK3VSkz4Nngg8yvG1zJ9pT8Ned6AjtCSiB",
+  "Ethereum_RPC_Url": "",
+  "Ethereum_Chain": "rinkeby", //rinkeby or main
+  "Validator_Key": "",
+  "API_Key": "",
+  "Eth_private_key": "", //arbitrary eth private key for making view calls
+  "XRPL_RPC": "wss://xls20-sandbox.rippletest.net:51233",
+  "Number_Validators": 3,
+  "SSL_Enabled": false,
+  "SSL_Cert_Path": "",
+  "SSL_Cert_Password": ""
+}
