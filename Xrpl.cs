@@ -33,9 +33,9 @@ namespace XLS_20_Bridge_MasterProcess
         public async Task SendNFTOfferTransactions()
         {
             List<BridgeNFT> list = db.GetRecordsByStatus("Validator Agreement Offer");
+            IRippleClient client = new RippleClient(config._xrplRPC);
             foreach (BridgeNFT nft in list)
             {
-                IRippleClient client = new RippleClient(config._xrplRPC);
                 try
                 {
                     client.Connect();
@@ -80,7 +80,11 @@ namespace XLS_20_Bridge_MasterProcess
                 }
                 finally
                 {
-                    client.Disconnect();
+                    try
+                    {
+                        client.Disconnect();
+                    }
+                    catch (Exception) { }
                 }
             }
         }
@@ -147,7 +151,11 @@ namespace XLS_20_Bridge_MasterProcess
                 }
                 finally
                 {
-                    client.Disconnect();
+                    try
+                    {
+                        client.Disconnect();
+                    }
+                    catch (Exception) { }
                 }
             }
         }
@@ -216,7 +224,11 @@ namespace XLS_20_Bridge_MasterProcess
                 }
                 finally
                 {
-                    client.Disconnect();
+                    try
+                    {
+                        client.Disconnect();
+                    }
+                    catch (Exception) { }
                 }
             }
             catch (Exception ex)
