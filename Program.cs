@@ -40,8 +40,8 @@ namespace XLS_20_Bridge_MasterProcess
             if (config._sslEnabled)
             {
                 // Create and prepare a new SSL server context
-                // var context = new SslContext(SslProtocols.Tls12, new X509Certificate2(config._sslCertPath, config._sslCertPassword == "" ? null : config._sslCertPassword));
-                var context = new SslContext(SslProtocols.Tls12, PemFileReader.ReadCert(config._sslCertPath));
+                var context = new SslContext(SslProtocols.Tls12, new X509Certificate2(config._sslCertPath, config._sslCertPassword == "" ? null : config._sslCertPassword));
+                //var context = new SslContext(SslProtocols.Tls12, ReadCert(config._sslCertPath));
 
                 // Create a new WebSocket server
                 validatorServer = new ValidatorSocketServerWss(context, IPAddress.Any, config._serverPort);
@@ -108,35 +108,12 @@ namespace XLS_20_Bridge_MasterProcess
             t.Interval = (config._tickTime * 1000);
             t.Start();
         }
-    }
-
-    public static class PemFileReader
-    {
-
-        public static X509Certificate2 ReadCert(string pathToPemFile)
+        private static X509Certificate2 ReadCert(string pathToPemFile)
         {
             X509CertificateParser x509CertificateParser = new X509CertificateParser();
             var cert = x509CertificateParser.ReadCertificate(File.ReadAllBytes(pathToPemFile));
 
             return new System.Security.Cryptography.X509Certificates.X509Certificate2(cert.GetEncoded());
         }
-
-        //public static AsymmetricKeyParameter ReadPemPrivateKey(string pathToPemFile)
-        //{
-
-        //    StreamReader streamReader = File.OpenText(pathToPemFile);
-
-        //    Org.BouncyCastle.Utilities.IO.Pem.PemReader pemReader = new Org.BouncyCastle.Utilities.IO.Pem.PemReader(streamReader);
-
-        //    PemObject pemObject = pemReader.ReadPemObject();
-
-        //    PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.GetInstance(pemObject.Content);
-
-        //    AsymmetricKeyParameter privateKeyBC = PrivateKeyFactory.CreateKey(privateKeyInfo);
-
-        //    return privateKeyBC;
-
-
-        //}
     }
 }
