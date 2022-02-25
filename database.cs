@@ -983,14 +983,7 @@ namespace XLS_20_Bridge_MasterProcess
                     return validators;
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-
-            }
+            catch (Exception){ return new List<string>(); }
         }
     }
 
