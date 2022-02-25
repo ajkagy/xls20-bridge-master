@@ -76,12 +76,12 @@ namespace XLS_20_Bridge_MasterProcess
                             if(validators.Count == 0)
                             {
                                 status = "Online";
-                                SendResponseAsync(Response.MakeGetResponse(JsonSerializer.Serialize(status), "application/json; charset=UTF-8"));
+                                SendResponseAsync(Response.MakeGetResponse("{\"status\": \"" + status + "\"}", "application/json; charset=UTF-8"));
                             }
                             else
                             {
                                 status = "Validation Offline";
-                                SendResponseAsync(Response.MakeGetResponse(JsonSerializer.Serialize(status), "application/json; charset=UTF-8"));
+                                SendResponseAsync(Response.MakeGetResponse("{\"status\": \"" + status + "\"}", "application/json; charset=UTF-8"));
                             }
                         }
                         else if (url.StartsWith("/api/xls20bridge/getStatus"))
