@@ -25,3 +25,9 @@ CREATE TABLE IF NOT EXISTS ValidatorMetadata (
 	agreeMint INTEGER DEFAULT 0,
 	agreeOffer INTEGER DEFAULT 0
 );
+
+CREATE TABLE IF NOT EXISTS ValidatorStatus (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	validatorNumber TEXT NOT NULL,
+	last_pinged NUMERIC DEFAULT 0
+);

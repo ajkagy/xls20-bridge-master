@@ -855,7 +855,6 @@ namespace XLS_20_Bridge_MasterProcess
 
         public string GetStatus(int tokenId, string contractAddress)
         {
-            List<BridgeNFT> list = new List<BridgeNFT>();
             using (SQLiteConnection conn = new SQLiteConnection(connectionstring))
             {
                 conn.Open();
@@ -925,6 +924,72 @@ namespace XLS_20_Bridge_MasterProcess
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        public void ValidatorUpdatePing(string validatorNumber)
+        {
+            try
+            {
+                using (var conn = new System.Data.SQLite.SQLiteConnection(connectionstring))
+                {
+                    conn.Open();
+
+                        var cmdInsert = new SQLiteCommand("Insert into ValidatorStatus (validatorNumber,last_pinged) select @validatorNumber,@last_pinged WHERE (SELECT COUNT(*) FROM ValidatorStatus WHERE validatorNumber = @validatorNumber) = 0", conn);
+                        cmdInsert.Parameters.Add(new SQLiteParameter("@validatorNumber", validatorNumber));
+                        cmdInsert.Parameters.Add(new SQLiteParameter("@last_pinged", DateTimeOffset.UtcNow.ToUnixTimeSeconds()));
+                        cmdInsert.ExecuteNonQuery();
+
+                        var cmdUpdate = new SQLiteCommand("Update ValidatorStatus SET last_pinged = @last_pinged WHERE validatorNumber = @validatorNumber", conn);
+
+                        cmdUpdate.Parameters.Add(new SQLiteParameter("@validatorNumber", validatorNumber));
+                        cmdUpdate.Parameters.Add(new SQLiteParameter("@last_pinged", DateTimeOffset.UtcNow.ToUnixTimeSeconds()));
+                        cmdUpdate.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+
+        public List<string> GetValidatorsToPing(int timeOffSetMins)
+        {
+            try
+            {
+                List<string> validators = new List<string>();
+                long offSet = (DateTimeOffset.UtcNow.ToUnixTimeSeconds() - (timeOffSetMins * 60));
+                using (SQLiteConnection conn = new SQLiteConnection(connectionstring))
+                {
+                    conn.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(conn))
+                    {
+                        cmd.CommandText = "Select last_pinged from ValidatorStatus Where last_pinged < @offSet";
+                        cmd.Parameters.Add(new SQLiteParameter("@offSet", offSet));
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                validators.Add(dr["validatorNumber"].ToString());
+                            }
+                        }
+                    }
+                    conn.Close();
+                    return validators;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
             }
         }
     }

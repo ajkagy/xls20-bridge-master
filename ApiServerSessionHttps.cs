@@ -69,6 +69,21 @@ namespace XLS_20_Bridge_MasterProcess
                                 SendResponseAsync(Response.MakeErrorResponse(500, "Server Error"));
                             }
                         }
+                        else if (url == "/api/xls20bridge/bridgeStatus")
+                        {
+                            List<string> validators = db.GetValidatorsToPing(6);
+                            string status = "";
+                            if(validators.Count == 0)
+                            {
+                                status = "Online";
+                                SendResponseAsync(Response.MakeGetResponse(JsonSerializer.Serialize(status), "application/json; charset=UTF-8"));
+                            }
+                            else
+                            {
+                                status = "Validation Offline";
+                                SendResponseAsync(Response.MakeGetResponse(JsonSerializer.Serialize(status), "application/json; charset=UTF-8"));
+                            }
+                        }
                         else if (url.StartsWith("/api/xls20bridge/getStatus"))
                         {
                             try

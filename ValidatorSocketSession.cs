@@ -71,6 +71,11 @@ namespace XLS_20_Bridge_MasterProcess
                 }
                 if (request.type == "Response")
                 {
+                    if (request.command == "Ping")
+                    {
+                        var payloadPingResponse = JsonSerializer.Deserialize<Payload>(message);
+                        db.ValidatorUpdatePing(payloadPingResponse.validator);
+                    }
                     if (request.command == "SignMessage")
                     {
                         var payloadSign = JsonSerializer.Deserialize<PayloadSign>(message);

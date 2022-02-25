@@ -41,7 +41,6 @@ namespace XLS_20_Bridge_MasterProcess
             {
                 // Create and prepare a new SSL server context
                 var context = new SslContext(SslProtocols.Tls12, new X509Certificate2(config._sslCertPath, config._sslCertPassword == "" ? null : config._sslCertPassword));
-                //var context = new SslContext(SslProtocols.Tls12, ReadCert(config._sslCertPath));
 
                 // Create a new WebSocket server
                 validatorServer = new ValidatorSocketServerWss(context, IPAddress.Any, config._serverPort);
@@ -79,6 +78,12 @@ namespace XLS_20_Bridge_MasterProcess
                 return;
             }
 
+            //Add validator Ping records
+            for(int i=1;i<=config._numberOfValidators;i++)
+            {
+                db.ValidatorUpdatePing(i.ToString());
+            }
+
             Console.WriteLine("Starting Master Process");
             t = new System.Timers.Timer();
             t.AutoReset = false;
@@ -93,6 +98,9 @@ namespace XLS_20_Bridge_MasterProcess
 
         static async void t_ElapsedAsync(object sender, System.Timers.ElapsedEventArgs e)
         {
+
+            PingValidators();
+
             await eth.PullBridgeContractDataAsync(config._blockNumber);
 
             validatorMessage.PushNewNFTsToValidators();
@@ -108,12 +116,14 @@ namespace XLS_20_Bridge_MasterProcess
             t.Interval = (config._tickTime * 1000);
             t.Start();
         }
-        private static X509Certificate2 ReadCert(string pathToPemFile)
-        {
-            X509CertificateParser x509CertificateParser = new X509CertificateParser();
-            var cert = x509CertificateParser.ReadCertificate(File.ReadAllBytes(pathToPemFile));
 
-            return new System.Security.Cryptography.X509Certificates.X509Certificate2(cert.GetEncoded());
+        static void PingValidators()
+        {
+           List<string> validators = db.GetValidatorsToPing(5);
+            if(validators.Count > 0)
+            {
+                validatorMessage.SendPing();
+            }
         }
     }
 }

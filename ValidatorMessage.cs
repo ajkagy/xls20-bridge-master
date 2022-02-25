@@ -19,6 +19,16 @@ namespace XLS_20_Bridge_MasterProcess
             validatorServer = _validatorServer;
         }
 
+        public void SendPing()
+        {
+            Payload payload = new Payload();
+            payload.type = "Request";
+            payload.command = "Ping";
+            payload.validator = "0";
+            var request = JsonSerializer.Serialize(payload);
+            validatorServer.MulticastText(request);
+        }
+
         public void PushNewNFTsToValidators()
         {
             List<BridgeNFT> list = db.GetPendingNFTs();
