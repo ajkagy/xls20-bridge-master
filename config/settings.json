@@ -5,11 +5,11 @@
   "Https_Server_Port": 11501,
   "Bridge_Contract": "0x9d26edd30bbcDc6EA8884f8c97620306e79D75Fd",
   "XRPL_Issuer": "rK3VSkz4Nngg8yvG1zJ9pT8Ned6AjtCSiB",
-  "Ethereum_RPC_Url": "",
+  "Ethereum_RPC_Url": "https://rinkeby.infura.io/v3/2f2fd4dc3c1b4e51ba66601b98937dcf",
   "Ethereum_Chain": "rinkeby", //rinkeby or main
-  "Validator_Key": "",
-  "API_Key": "",
-  "Eth_private_key": "", //arbitrary eth private key for making view calls
+  "Validator_Key": "840f0c69-c04d-4aca-bed4-074fb261561b",
+  "API_Key": "ca8b09b9-baca-4dfd-ade6-19e6ebdb45f6",
+  "Eth_private_key": "9763ed06fbfa42f2bc3b486d0c232dd58758dedba0db96294ddc8eb05e33313f", //arbitrary eth private key for making view calls
   "XRPL_RPC": "wss://xls20-sandbox.rippletest.net:51233",
   "Number_Validators": 3,
   "SSL_Enabled": false,

@@ -388,7 +388,8 @@ namespace XLS_20_Bridge_MasterProcess
                 conn.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(conn))
                 {
-                    cmd.CommandText = "Select BridgeNFT.* from BridgeNFT Inner join ValidatorMetadata on BridgeNFT.id = ValidatorMetadata.bridgeNFTId  Where status = 'Pending' and (Select count(*) from BridgeNFT where status != 'Pending' and status != 'Error' and status != 'OfferCompleted' and status != 'Previously Offered' and status != 'Previously Minted') = 0 and ValidatorMetadata.mintSign = '' order by id asc LIMIT 1";
+                   // cmd.CommandText = "Select BridgeNFT.* from BridgeNFT Inner join ValidatorMetadata on BridgeNFT.id = ValidatorMetadata.bridgeNFTId  Where status = 'Pending' and (Select count(*) from BridgeNFT where status != 'Pending' and status != 'Error' and status != 'OfferCompleted' and status != 'Previously Offered' and status != 'Previously Minted') = 0 and ValidatorMetadata.mintSign = '' order by id asc LIMIT 1";
+                    cmd.CommandText = "Select BridgeNFT.* from BridgeNFT Inner join ValidatorMetadata on BridgeNFT.id = ValidatorMetadata.bridgeNFTId  Where status = 'Pending' and ValidatorMetadata.mintSign = '' order by id asc LIMIT 1";
                     using (SQLiteDataReader dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
